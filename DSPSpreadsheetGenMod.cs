@@ -445,10 +445,10 @@ namespace StarSectorResourceSpreadsheetGenerator
         public static String CapturePlanetResourceData(PlanetData planet)
         {
             StarData star = planet.star;
-            string precision = "";
+            string floatFormat = "";
             if (spreadsheetFloatPrecision >= 0)
             {
-                precision = "F" + spreadsheetFloatPrecision.ToString();
+                floatFormat = "F" + spreadsheetFloatPrecision.ToString();
             }
 
             var sb = new StringBuilder();
@@ -456,19 +456,19 @@ namespace StarSectorResourceSpreadsheetGenerator
             {
                 planet.displayName,
                 star.displayName,
-                star.dysonLumino.ToString(precision, spreadsheetLocale),
+                star.dysonLumino.ToString(floatFormat, spreadsheetLocale),
                 star.typeString,
-                star.mass.ToString(precision, spreadsheetLocale),
-                star.position.x.ToString(precision, spreadsheetLocale),
-                star.position.y.ToString(precision, spreadsheetLocale),
-                star.position.z.ToString(precision, spreadsheetLocale),
-                planet.windStrength.ToString(precision, spreadsheetLocale),
-                planet.luminosity.ToString(precision, spreadsheetLocale),
+                star.mass.ToString(floatFormat, spreadsheetLocale),
+                star.position.x.ToString(floatFormat, spreadsheetLocale),
+                star.position.y.ToString(floatFormat, spreadsheetLocale),
+                star.position.z.ToString(floatFormat, spreadsheetLocale),
+                planet.windStrength.ToString(floatFormat, spreadsheetLocale),
+                planet.luminosity.ToString(floatFormat, spreadsheetLocale),
                 planet.typeString,
-                planet.landPercent.ToString(precision, spreadsheetLocale),
+                planet.landPercent.ToString(floatFormat, spreadsheetLocale),
                 planet.singularity.ToString(),
                 planet.orbitAround.ToString(),
-                planet.orbitInclination.ToString(precision, spreadsheetLocale)
+                planet.orbitInclination.ToString(floatFormat, spreadsheetLocale)
             };
 
             if (planet.type == EPlanetType.Gas)
@@ -487,7 +487,7 @@ namespace StarSectorResourceSpreadsheetGenerator
                     }
                     else
                     {
-                        line.Add(planet.gasSpeeds[index].ToString(precision, spreadsheetLocale));
+                        line.Add(planet.gasSpeeds[index].ToString(floatFormat, spreadsheetLocale));
                     }
                 }
                 foreach(string entry in line)
@@ -527,7 +527,7 @@ namespace StarSectorResourceSpreadsheetGenerator
                         long amount = planet.veinAmounts[(int)type];
                         if (type == EVeinType.Oil)
                         {
-                            line.Add(((double)amount * VeinData.oilSpeedMultiplier).ToString(precision, spreadsheetLocale));
+                            line.Add(((double)amount * VeinData.oilSpeedMultiplier).ToString(floatFormat, spreadsheetLocale));
                         }
                         else
                         {
